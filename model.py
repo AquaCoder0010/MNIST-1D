@@ -10,8 +10,8 @@ class Linear:
 
     def forward(self, x):
         assert isinstance(x, np.ndarray) == True
-        assert x.shape[0] == self.weight.shape[-1] and len(x.shape) != 1
-        return self.weight @ x + self.bias    
+        assert x.shape[1] == self.weight.shape[-1] and len(x.shape) != 1
+        return x @ self.weight.T + self.bias.T    
 
     def backward(self, y):
         pass;
