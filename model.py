@@ -11,19 +11,23 @@ class Linear:
     def forward(self, x):
         assert isinstance(x, np.ndarray) == True
         assert x.shape[1] == self.weight.shape[-1] and len(x.shape) != 1
+        self.x_input = x
         return x @ self.weight.T + self.bias.T    
 
-    def backward(self, y):
-        pass;
+    def backward(self, grad):
+        self.dW = grad.T @ self.x_input
+        self.db = np.sum(grad, axis=0, keepdims=True).T
+        return grad @ self.weight
         
 # define a RELU function        
 class ReLU:
     def __init__(self):
         pass;
     def forward(self, x):
+        self.x_input = x
         return np.maximum(x, 0)
-    def backward(self, y):
-        pass;
+    def backward(self, grad):
+        return grad * (self.x_input > 0)
 
 
 
