@@ -1,9 +1,5 @@
 import numpy as np
 
-# define a SoftMax function
-
-
-
 class MultiClassCrossEntropyLoss:
     def __init__(self, k):
         self.k = k
