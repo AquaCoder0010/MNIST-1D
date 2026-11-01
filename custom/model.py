@@ -25,3 +25,11 @@ class ReLU:
         return np.maximum(x, 0)
     def backward(self, gradm, learning_rate):
         return gradm * (self.x_input > 0)
+
+def forward(x, model_layers):
+    assert all(isinstance(layer, (Linear, ReLU)) for layer in model_layers)
+    out = x
+    for layer in model_layers:
+        out = layer.forward(out)
+    return out
+
